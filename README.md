@@ -17,7 +17,8 @@ Este es el backend para un sistema de gestión de pañol, diseñado para adminis
 - **Express**
 - **MongoDB**
 - **Mongoose**
-- **Postman** (para pruebas)
+- **Apollo Server** (para GraphQL)
+- **Postman** (para pruebas de REST)
 
 ---
 
