@@ -1,8 +1,19 @@
 const express = require('express');
-const router = express.Router();
+const Prestamo = require('../models/prestamo.model');
+const createResolvers = require('../utils/resolvers');
 const prestamosController = require('../controllers/prestamos.controller');
 
-router.post('/', prestamosController.crearPrestamo); // Crear préstamo a partir de solicitud aprobada
-router.put('/:id/devolver', prestamosController.devolverPrestamo); // Devolver préstamo
+const router = express.Router();
+const resolvers = createResolvers(Prestamo);
+
+// CRUD estándar
+router.get('/', resolvers.getAll);
+router.get('/:id', resolvers.getById);
+router.post('/', resolvers.create);
+router.put('/:id', resolvers.update);
+router.delete('/:id', resolvers.delete);
+
+// Operación personalizada
+router.put('/:id/devolver', prestamosController.devolverPrestamo);
 
 module.exports = router;

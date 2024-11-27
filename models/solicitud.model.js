@@ -1,26 +1,27 @@
 const mongoose = require('mongoose');
+const createSchema = require('../utils/schema'); // Plantilla genérica para esquemas
 
-const SolicitudSchema = new mongoose.Schema({
+const solicitudSchema = createSchema({
   usuarioId: {
-    type: mongoose.Schema.Types.ObjectId, // Relación con el usuario que realiza la solicitud
-    ref: 'Usuario', // Nombre del modelo de la clase relacionada (Usuario)
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Usuario', // Relación con el modelo Usuario
+    required: true,
   },
   estado: {
     type: String,
-    enum: ['PENDIENTE', 'APROBADA', 'RECHAZADA'],
+    enum: ['PENDIENTE', 'APROBADA', 'RECHAZADA'], // Estados permitidos
     default: 'PENDIENTE',
-    required: true
+    required: true,
   },
   fechaCreacion: {
     type: Date,
-    default: Date.now
+    default: Date.now, // Fecha automática de creación
   },
   prestamoId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Prestamo', // Nombre del modelo de la clase relacionada (Préstamo)
-    default: null
+    ref: 'Prestamo', // Relación opcional con el modelo Prestamo
+    default: null,
   },
 });
 
-module.exports = mongoose.model('Solicitud', SolicitudSchema);
+module.exports = mongoose.model('Solicitud', solicitudSchema);

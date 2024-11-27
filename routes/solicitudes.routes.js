@@ -1,12 +1,15 @@
 const express = require('express');
-const router = express.Router();
-const solicitudesController = require('../controllers/solicitudes.controller');
+const Solicitud = require('../models/solicitud.model');
+const createResolvers = require('../utils/resolvers');
 
-// Rutas para manejar solicitudes
-router.get('/', solicitudesController.getSolicitudes); // Obtener todas las solicitudes
-router.post('/', solicitudesController.crearSolicitud); // Crear una nueva solicitud
-router.get('/:id', solicitudesController.getSolicitudPorId); // Obtener solicitud por ID
-router.put('/:id', solicitudesController.actualizarSolicitud); // Actualizar solicitud por ID
-router.delete('/:id', solicitudesController.eliminarSolicitud); // Eliminar solicitud por ID
+const router = express.Router();
+const resolvers = createResolvers(Solicitud);
+
+// CRUD estándar
+router.get('/', resolvers.getAll);
+router.get('/:id', resolvers.getById);
+router.post('/', resolvers.create);
+router.put('/:id', resolvers.update);
+router.delete('/:id', resolvers.delete);
 
 module.exports = router;
