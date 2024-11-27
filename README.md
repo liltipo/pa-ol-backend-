@@ -44,4 +44,4 @@ A continuación, se describe una muestra de los endpoints disponibles:
 }
 ```
 
-Existen métodos y endpoints similares para **Préstamos**, **Porductos** y **Solicitudes**.
+Existen métodos y endpoints similares para **Préstamos**, **Productos** y **Solicitudes**.
