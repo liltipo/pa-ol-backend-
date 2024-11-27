@@ -1,62 +1,47 @@
-# Informe de Algoritmos y Complejidad
+# Sistema de Gestión de Pañol (Backend)
 
-Este repositorio incluye tres carpetas principales: `sortingAlgorithms`, `matrixMultiplication` y `benchmarks`.
+Este es el backend para un sistema de gestión de pañol, diseñado para administrar préstamos, usuarios, solicitudes y productos en una base de datos MongoDB. Proporciona una API RESTful desarrollada con **Node.js**, **Express** y **MongoDB**.
 
-## `sortingAlgorithms`
+### Características
 
-La carpeta `sortingAlgorithms` contiene dos subcarpetas:
+- **Gestión de Usuarios**: CRUD completo para usuarios, incluyendo roles como `ALUMNO`, `DOCENTE`, `PAÑOLERO`, etc.
+- **Gestión de Solicitudes**: Permite la creación y gestión de solicitudes de productos.
+- **Gestión de Préstamos**: Asociación entre solicitudes aprobadas y préstamos.
+- **Gestión de Productos**: CRUD completo para los productos disponibles en el pañol.
 
-1. **`codes`**: 
-   - Esta subcarpeta incluye el código de 5 algoritmos de ordenamiento: 
-     - `bubbleSort`
-     - `mergeSort`
-     - `quickSort`
-     - `stlSort` (implementación de la función `.sort()` de la STL)
-     - `bogoSort` (agregado como una implementación adicional)
-   
-2. **`dataset`**:
-   - Contiene dos conjuntos de datos para pruebas de rendimiento con tamaños de 10,000 y 1,000,000 números ordenados en:
-     - Orden ascendente
-     - Orden descendente
-     - Orden aleatorio
-     - Orden parcial (solo 1,000,000 de elementos)
-   - Además, incluye un conjunto especial de datos de 12 elementos para `bogoSort`.
+---
 
-### Makefile
-En la carpeta `sortingAlgorithms` también se encuentra un `Makefile` que proporciona los siguientes comandos:
+### Tecnologías Usadas
 
-- **`make`**: Compila todos los algoritmos de ordenamiento.
-- **`make run`**: Ejecuta los algoritmos de ordenamiento utilizando los conjuntos de datos de 1,000,000 de números (por defecto).
-- **`make runBogo`**: Ejecuta `bogoSort` con su conjunto especial de 12 elementos.
-- **`make clean`**: Elimina todos los archivos creados.
+- **Node.js**
+- **Express**
+- **MongoDB**
+- **Mongoose**
+- **Postman** (para pruebas)
 
-## `matrixMultiplication`
+---
 
-La carpeta `matrixMultiplication` contiene 5 archivos principales:
+## Endpoints de la API
 
-1. `naiveMM`
-2. `cacheOptimizedMM`
-3. `strassenMM`
-4. `strassenMM2`
-5. `strassenMM3`
+A continuación, se describe una muestra de los endpoints disponibles:
 
-### Makefile
-En la carpeta `matrixMultiplication`, se incluye un `Makefile` que proporciona los siguientes comandos:
+### **Usuarios**
 
-- **`make`**: Compila todos los algoritmos de multiplicación de matrices.
-- **`make run`**: 
-    - Ejecuta los archivos con matrices de tamaño:
-    - 2048x2048, 1024x1024, y 512x512 para `naiveMM`, `cacheOptimizedMM`, y `strassenMM`.
-    - 512x512 para `strassenMM2` y `strassenMM3`.
-- **`make clean`**: Elimina todos los archivos creados.
+| Método | Endpoint          | Descripción                         |
+|--------|--------------------|-------------------------------------|
+| GET    | `/usuarios`        | Obtener todos los usuarios.         |
+| GET    | `/usuarios/:id`    | Obtener un usuario por ID.          |
+| POST   | `/usuarios`        | Crear un nuevo usuario.             |
+| PUT    | `/usuarios/:id`    | Actualizar un usuario por ID.       |
+| DELETE | `/usuarios/:id`    | Eliminar un usuario por ID.         |
 
-**Nota:** No se incluye un dataset predefinido para la multiplicación de matrices, ya que cada archivo genera dos matrices del tamaño especificado en la entrada del `Makefile`.
+**Ejemplo de Body para POST `/usuarios`**:
+```json
+{
+  "nombre": "Juan Pérez",
+  "correo": "juan.perez@example.com",
+  "rol": "ALUMNO"
+}
+```
 
-La carpeta `benchmarks`, contiene nueve imágenes:
-- Una para la multiplicación de matrices.
-- Seis imágenes para los algoritmos de ordenamiento, distribuidas de la siguiente manera:
-  - Dos para orden ascendente (1,000,000 y 10,000 elementos).
-  - Dos para orden descendente (mismos tamaños).
-  - Dos para orden aleatorio (mismos tamaños).
-  - Una para orden parcial (1,000,000 elementos)
-- Una para `bogoSort` y su dataset.
+Existen métodos y endpoints similares para **Préstamos**, **Porductos** y **Solicitudes**.
