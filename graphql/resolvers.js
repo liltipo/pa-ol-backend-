@@ -1,5 +1,6 @@
 const Usuario = require('../models/usuario.model');
 const Solicitud = require('../models/solicitud.model');
+const Producto = require('../models/producto.model');
 
 const resolvers = {
   Query: {
@@ -28,6 +29,28 @@ const resolvers = {
     },
     eliminarSolicitud: async (_, { id }) => {
       return await Solicitud.findByIdAndDelete(id);
+    },
+    crearProducto: async (_, { nombre, categoria, detalle, cantidad, imagen }) => {
+      const nuevoProducto = new Producto({ nombre, categoria, detalle, cantidad, imagen });
+      return await nuevoProducto.save();
+    },
+    actualizarProducto: async (_, { id, nombre, categoria, detalle, cantidad, imagen }) => {
+      try {
+        const actualizaciones = { nombre, categoria, detalle, cantidad, imagen };
+        // Filtra campos no definidos para evitar sobreescribir valores con "undefined"
+        Object.keys(actualizaciones).forEach(key => {
+          if (actualizaciones[key] === undefined) delete actualizaciones[key];
+        });
+
+        const productoActualizado = await Producto.findByIdAndUpdate(id, actualizaciones, { new: true });
+        if (!productoActualizado) {
+          throw new Error('Producto no encontrado');
+        }
+
+        return productoActualizado;
+      } catch (error) {
+        throw new Error(`Error al actualizar el producto: ${error.message}`);
+      }
     },
   },
 };

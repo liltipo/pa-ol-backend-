@@ -18,6 +18,16 @@ const typeDefs = gql`
     prestamoId: ID
   }
 
+  # Definición del tipo Producto
+  type Producto {
+    id: ID!
+    nombre: String!
+    categoria: String!
+    detalle: String
+    cantidad: Int!
+    imagen: String
+  }
+
   # Operaciones de consulta (Query)
   type Query {
     usuarios: [Usuario]
@@ -35,6 +45,9 @@ const typeDefs = gql`
     crearSolicitud(usuarioId: ID!, estado: String): Solicitud
     actualizarSolicitud(id: ID!, estado: String): Solicitud
     eliminarSolicitud(id: ID!): Solicitud
+    
+    crearProducto(nombre: String!, categoria: String!, detalle: String, cantidad: Int!, imagen: String): Producto
+    actualizarProducto(id: ID!, nombre: String, categoria: String, detalle: String, cantidad: Int, imagen: String): Producto
   }
 `;
 
