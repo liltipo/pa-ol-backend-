@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const createSchema = require('../utils/schema'); // Plantilla genérica para esquemas
 
-const ProductoSchema = new mongoose.Schema({
+const ProductoSchema = createSchema({
   nombre: {
     type: String,
     required: true,
